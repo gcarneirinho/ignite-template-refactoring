@@ -6,8 +6,20 @@ import Food from '../../components/Food';
 import ModalAddFood from '../../components/ModalAddFood';
 import ModalEditFood from '../../components/ModalEditFood';
 import { FoodsContainer } from './styles';
+interface Food {
+  id: number;
+  name: string;
+  description: string;
+  price: number;
+  available: boolean;
+  image: string;
+}
 
-const Dashboard: React.FC = (props) => {
+interface DashboardProps {
+
+}
+
+const Dashboard: React.FC = () => {
 
   const [ foods, setFoods ] = useState<any>([]);
   const [ editingFood, setEditingFood ] = useState({});
@@ -25,7 +37,7 @@ const Dashboard: React.FC = (props) => {
   },[])
 
 
-  const handleAddFood = async (food) => {
+  const handleAddFood = async (food:Food) => {
 
     try {
       const response = await api.post('/foods', {
@@ -39,7 +51,7 @@ const Dashboard: React.FC = (props) => {
     }
   }
 
-  const handleUpdateFood = async (food) => {
+  const handleUpdateFood = async (food:Food) => {
 
     try {
       const foodUpdated = await api.put(
@@ -57,7 +69,7 @@ const Dashboard: React.FC = (props) => {
     }
   }
 
-  const handleDeleteFood = async id => {
+  const handleDeleteFood = async (id:number) => {
 
     await api.delete(`/foods/${id}`);
 
@@ -76,7 +88,7 @@ const Dashboard: React.FC = (props) => {
     setModalOpen(!editModalOpen);
   }
 
-  const handleEditFood = food => {
+  const handleEditFood = (food:Food) => {
     setEditingFood(food);
     setEditingFood(true);
   }
