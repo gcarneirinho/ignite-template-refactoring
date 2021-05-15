@@ -13,16 +13,16 @@ import { IconBaseProps } from 'react-icons';
 import { Container } from './styles';
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
-  name: string;
-  icon: React.ComponentType<IconBaseProps>;
+  name: string,
+  placeholder: string,
+  icon?: React.ComponentType<IconBaseProps>;
 }
 
-const Input = ({ name, icon: Icon, ...rest }:InputProps) => {
-  const inputRef = useRef(null);
+const Input: React.FC<InputProps> = ({ name, placeholder, icon: Icon, ...rest }) => {
+  const inputRef = useRef<HTMLInputElement | null>(null);
 
   const [ isFocused, setIsFocused ] = useState(false);
   const [ isFilled, setIsFilled ] = useState(false);
-
   const { fieldName, defaultValue, registerField } = useField(name);
 
   const handleInputFocus = useCallback(() => {
@@ -52,6 +52,7 @@ const Input = ({ name, icon: Icon, ...rest }:InputProps) => {
         onBlur={handleInputBlur}
         defaultValue={defaultValue}
         ref={inputRef}
+        placeholder={placeholder}
         {...rest}
       />
     </Container>

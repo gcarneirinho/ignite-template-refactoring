@@ -3,10 +3,10 @@ import ReactModal from 'react-modal';
 
 interface ModalProps {
   isOpen: boolean;
-  setIsOpen: () => {};
+  setIsOpen: () => void;
   children: ReactNode;
 }
-const Modal = ({isOpen, children}:ModalProps) => {
+const Modal = ({isOpen, children, setIsOpen}:ModalProps) => {
 
   const [ modalStatus, setModalStatus ] = useState(isOpen);
 
